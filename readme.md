@@ -12,7 +12,6 @@ A RESTful API for generating, validating, and logging time-bound discount coupon
 - [Setup and Installation](#setup-and-installation)
 - [Database](#database)
 - [API Endpoints](#api-endpoints)
-- [Development Scripts](#development-scripts)
 - [Testing the API](#testing-the-api)
 
 ---
@@ -136,32 +135,7 @@ A RESTful API for generating, validating, and logging time-bound discount coupon
    ]
    ```
 
-## **Development Scripts**
 
-Start the development server:
-```bash
-npm run dev
-```
-
-Build the project:
-```bash
-npm run build
-```
-
-Start the production server:
-```bash
-npm start
-```
-
-Run database migrations:
-```bash
-npx prisma migrate dev
-```
-
-Open Prisma Studio (GUI for database):
-```bash
-npx prisma studio
-```
 
 ## **Testing the API**
 
