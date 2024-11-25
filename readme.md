@@ -10,7 +10,6 @@ A RESTful API for generating, validating, and logging time-bound discount coupon
 - [Tech Stack](#tech-stack)
 - [Requirements](#requirements)
 - [Setup and Installation](#setup-and-installation)
-- [Environment Variables](#environment-variables)
 - [Database](#database)
 - [API Endpoints](#api-endpoints)
 - [Development Scripts](#development-scripts)
@@ -73,23 +72,7 @@ A RESTful API for generating, validating, and logging time-bound discount coupon
    ```
    Access the API at [http://localhost:3000](http://localhost:3000).
 
-## **Environment Variables**
 
-Create a `.env` file in the root directory with the following keys:
-```env
-DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
-PORT=3000
-```
-Replace `<username>`, `<password>`, `<host>`, `<port>`, and `<database>` with your PostgreSQL credentials.
-
-## **Database**
-
-This API uses Prisma ORM to interact with a PostgreSQL database. The Prisma schema is defined in `prisma/schema.prisma`.
-
-To visualize or edit data, use Prisma Studio:
-```bash
-npx prisma studio
-```
 
 ## **API Endpoints**
 
