@@ -15,7 +15,6 @@ A RESTful API for generating, validating, and logging time-bound discount coupon
 - [API Endpoints](#api-endpoints)
 - [Development Scripts](#development-scripts)
 - [Testing the API](#testing-the-api)
-- [License](#license)
 
 ---
 
