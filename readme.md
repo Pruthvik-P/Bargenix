@@ -48,7 +48,7 @@ A RESTful API for generating, validating, and logging time-bound discount coupon
 
 1. **Clone the Repository**  
    ```bash
-   git clone https://github.com/<your-username>/coupon-api.git
+   git clone https://github.com/Pruthvik-P/Bargenic-api.git
    cd coupon-api
 
 2. **Install Dependencies**  
