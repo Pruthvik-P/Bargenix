@@ -12,44 +12,51 @@ npm or yarn
 Installation
 Clone the repository:
 
-bash
-Copy code
+\`\`\`bash
 git clone https://github.com/<your-username>/coupon-api.git
 cd coupon-api
+\`\`\`
+
 Install dependencies:
 
-bash
-Copy code
+\`\`\`bash
 npm install
+\`\`\`
+
 Set up environment variables: Create a .env file in the root directory and add the following:
 
-env
-Copy code
+\`\`\`env
 DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
 PORT=3000
+\`\`\`
+
 Set up the database: Run the following commands to initialize Prisma and migrate the database:
 
-bash
-Copy code
+\`\`\`bash
 npx prisma generate
 npx prisma migrate dev --name init
+\`\`\`
+
 Start the server:
 
-bash
-Copy code
+\`\`\`bash
 npm run dev
+\`\`\`
+
 API Endpoints
 1. Generate a Coupon
 Endpoint: POST /api/coupons/generate
 Request Body:
-json
-Copy code
+
+\`\`\`json
 {
   "productId": "12345"
 }
+\`\`\`
+
 Response:
-json
-Copy code
+
+\`\`\`json
 {
   "message": "Coupon generated successfully.",
   "coupon": {
@@ -59,26 +66,32 @@ Copy code
     "expiresAt": "2024-11-24T14:00:00Z"
   }
 }
+\`\`\`
+
 2. Validate a Coupon
 Endpoint: POST /api/coupons/validate
 Request Body:
-json
-Copy code
+
+\`\`\`json
 {
   "productId": "12345",
   "discountCode": "DISCOUNT-ABCDE123"
 }
+\`\`\`
+
 Response:
-json
-Copy code
+
+\`\`\`json
 {
   "message": "Coupon is valid."
 }
+\`\`\`
+
 3. Fetch Logs
 Endpoint: GET /api/logs
 Response:
-json
-Copy code
+
+\`\`\`json
 [
   {
     "id": "1",
@@ -94,31 +107,38 @@ Copy code
     "createdAt": "2024-11-24T13:00:00Z"
   }
 ]
+\`\`\`
+
 Development Scripts
 Run the development server:
 
-bash
-Copy code
+\`\`\`bash
 npm run dev
+\`\`\`
+
 Build the project for production:
 
-bash
-Copy code
+\`\`\`bash
 npm run build
+\`\`\`
+
 Run the production server:
 
-bash
-Copy code
+\`\`\`bash
 npm start
+\`\`\`
+
 Run database migrations:
 
-bash
-Copy code
+\`\`\`bash
 npx prisma migrate dev
+\`\`\`
+
 Open the Prisma Studio (database GUI):
 
-bash
-Copy code
+\`\`\`bash
 npx prisma studio
+\`\`\`
+
 Testing the API
 Use tools like Postman, cURL, or the provided Postman collection in the project. Refer to the Postman Collection for detailed requests.
