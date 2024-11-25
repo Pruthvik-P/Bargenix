@@ -56,17 +56,16 @@ A RESTful API for generating, validating, and logging time-bound discount coupon
    npm install
    ```
 
-3. **Set up Environment Variables**  
-   Refer to the [Environment Variables](#environment-variables) section for details.
 
-4. **Set up the Database**  
+
+3. **Set up the Database**  
    Run the following commands to initialize Prisma and migrate the database schema:
    ```bash
    npx prisma generate
    npx prisma migrate dev --name init
    ```
 
-5. **Run the Development Server**  
+4. **Run the Development Server**  
    ```bash
    npm run dev
    ```
