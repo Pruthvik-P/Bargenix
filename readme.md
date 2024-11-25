@@ -67,7 +67,7 @@ A RESTful API for generating, validating, and logging time-bound discount coupon
 
 4. **Run the Development Server**  
    ```bash
-   npm run dev
+   node dist/index.js
    ```
    Access the API at [http://localhost:3000](http://localhost:3000).
 
