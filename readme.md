@@ -1,144 +1,214 @@
-Coupon API
-This project is a RESTful API built with TypeScript, Express, Prisma, and PostgreSQL. It allows users to generate time-bound discount coupons, validate them, and log actions in a mock database.
+# **Coupon API**
 
-Features
-Generate unique discount coupons for specific products.
-Validate coupons for specific products and users.
-Log API requests for audit and debugging.
-Requirements
-Node.js (v16 or later)
-PostgreSQL (v12 or later)
-npm or yarn
-Installation
-Clone the repository:
+A RESTful API for generating, validating, and logging time-bound discount coupons using TypeScript, Express.js, Prisma, and PostgreSQL.
 
-\`\`\`bash
-git clone https://github.com/<your-username>/coupon-api.git
-cd coupon-api
-\`\`\`
+---
 
-Install dependencies:
+## **Table of Contents**
 
-\`\`\`bash
-npm install
-\`\`\`
+- [Features](#features)
+- [Tech Stack](#tech-stack)
+- [Requirements](#requirements)
+- [Setup and Installation](#setup-and-installation)
+- [Environment Variables](#environment-variables)
+- [Database](#database)
+- [API Endpoints](#api-endpoints)
+- [Development Scripts](#development-scripts)
+- [Testing the API](#testing-the-api)
+- [License](#license)
 
-Set up environment variables: Create a .env file in the root directory and add the following:
+---
 
-\`\`\`env
+## **Features**
+
+- Generate unique, time-bound discount coupons for specific products.
+- Validate the coupon for specific users and products.
+- Maintain an audit trail by logging all API requests.
+- Built with TypeScript for type safety and scalability.
+
+---
+
+## **Tech Stack**
+
+- **Language:** TypeScript
+- **Framework:** Express.js
+- **Database:** PostgreSQL
+- **ORM:** Prisma
+- **Dev Tools:** Nodemon, ESLint, Prettier
+
+---
+
+## **Requirements**
+
+- [Node.js](https://nodejs.org/) (v16 or later)
+- [PostgreSQL](https://www.postgresql.org/) (v12 or later)
+- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+
+---
+
+## **Setup and Installation**
+
+1. **Clone the Repository**  
+   ```bash
+   git clone https://github.com/<your-username>/coupon-api.git
+   cd coupon-api
+
+2. **Install Dependencies**  
+   ```bash
+   npm install
+   ```
+
+3. **Set up Environment Variables**  
+   Refer to the [Environment Variables](#environment-variables) section for details.
+
+4. **Set up the Database**  
+   Run the following commands to initialize Prisma and migrate the database schema:
+   ```bash
+   npx prisma generate
+   npx prisma migrate dev --name init
+   ```
+
+5. **Run the Development Server**  
+   ```bash
+   npm run dev
+   ```
+   Access the API at [http://localhost:3000](http://localhost:3000).
+
+## **Environment Variables**
+
+Create a `.env` file in the root directory with the following keys:
+```env
 DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
 PORT=3000
-\`\`\`
+```
+Replace `<username>`, `<password>`, `<host>`, `<port>`, and `<database>` with your PostgreSQL credentials.
 
-Set up the database: Run the following commands to initialize Prisma and migrate the database:
+## **Database**
 
-\`\`\`bash
-npx prisma generate
-npx prisma migrate dev --name init
-\`\`\`
+This API uses Prisma ORM to interact with a PostgreSQL database. The Prisma schema is defined in `prisma/schema.prisma`.
 
-Start the server:
+To visualize or edit data, use Prisma Studio:
+```bash
+npx prisma studio
+```
 
-\`\`\`bash
+## **API Endpoints**
+
+1. **Generate Coupon**  
+   **Method:** POST  
+   **Endpoint:** `/api/coupons/generate`  
+   **Payload:**
+   ```json
+   {
+     "productId": "12345"
+   }
+   ```
+   **Response:**
+   ```json
+   {
+     "message": "Coupon generated successfully.",
+     "coupon": {
+       "id": "1",
+       "productId": "12345",
+       "discountCode": "DISCOUNT-ABCDE123",
+       "expiresAt": "2024-11-24T14:00:00Z"
+     }
+   }
+   ```
+
+2. **Validate Coupon**  
+   **Method:** POST  
+   **Endpoint:** `/api/coupons/validate`  
+   **Payload:**
+   ```json
+   {
+     "productId": "12345",
+     "discountCode": "DISCOUNT-ABCDE123"
+   }
+   ```
+   **Response:**
+   ```json
+   {
+     "message": "Coupon is valid."
+   }
+   ```
+
+3. **Fetch Logs**  
+   **Method:** GET  
+   **Endpoint:** `/api/logs`  
+   **Response:**
+   ```json
+   [
+     {
+       "id": "1",
+       "action": "generateCoupon",
+       "details": {
+         "coupon": {
+           "id": "1",
+           "productId": "12345",
+           "discountCode": "DISCOUNT-ABCDE123",
+           "expiresAt": "2024-11-24T14:00:00Z"
+         }
+       },
+       "createdAt": "2024-11-24T13:00:00Z"
+     }
+   ]
+   ```
+
+## **Development Scripts**
+
+Start the development server:
+```bash
 npm run dev
-\`\`\`
+```
 
-API Endpoints
-1. Generate a Coupon
-Endpoint: POST /api/coupons/generate
-Request Body:
-
-\`\`\`json
-{
-  "productId": "12345"
-}
-\`\`\`
-
-Response:
-
-\`\`\`json
-{
-  "message": "Coupon generated successfully.",
-  "coupon": {
-    "id": "1",
-    "productId": "12345",
-    "discountCode": "DISCOUNT-ABCDE123",
-    "expiresAt": "2024-11-24T14:00:00Z"
-  }
-}
-\`\`\`
-
-2. Validate a Coupon
-Endpoint: POST /api/coupons/validate
-Request Body:
-
-\`\`\`json
-{
-  "productId": "12345",
-  "discountCode": "DISCOUNT-ABCDE123"
-}
-\`\`\`
-
-Response:
-
-\`\`\`json
-{
-  "message": "Coupon is valid."
-}
-\`\`\`
-
-3. Fetch Logs
-Endpoint: GET /api/logs
-Response:
-
-\`\`\`json
-[
-  {
-    "id": "1",
-    "action": "generateCoupon",
-    "details": {
-      "coupon": {
-        "id": "1",
-        "productId": "12345",
-        "discountCode": "DISCOUNT-ABCDE123",
-        "expiresAt": "2024-11-24T14:00:00Z"
-      }
-    },
-    "createdAt": "2024-11-24T13:00:00Z"
-  }
-]
-\`\`\`
-
-Development Scripts
-Run the development server:
-
-\`\`\`bash
-npm run dev
-\`\`\`
-
-Build the project for production:
-
-\`\`\`bash
+Build the project:
+```bash
 npm run build
-\`\`\`
+```
 
-Run the production server:
-
-\`\`\`bash
+Start the production server:
+```bash
 npm start
-\`\`\`
+```
 
 Run database migrations:
-
-\`\`\`bash
+```bash
 npx prisma migrate dev
-\`\`\`
+```
 
-Open the Prisma Studio (database GUI):
-
-\`\`\`bash
+Open Prisma Studio (GUI for database):
+```bash
 npx prisma studio
-\`\`\`
+```
 
-Testing the API
-Use tools like Postman, cURL, or the provided Postman collection in the project. Refer to the Postman Collection for detailed requests.
+## **Testing the API**
+
+You can test the API using tools like Postman or cURL. A Postman collection is included in this repository as `postman-collection.json`.
+
+### Example cURL Commands
+
+**Generate Coupon:**
+```bash
+curl -X POST http://localhost:3000/api/coupons/generate \
+-H "Content-Type: application/json" \
+-d '{"productId": "12345"}'
+```
+
+**Validate Coupon:**
+```bash
+curl -X POST http://localhost:3000/api/coupons/validate \
+-H "Content-Type: application/json" \
+-d '{"productId": "12345", "discountCode": "DISCOUNT-ABCDE123"}'
+```
+
+**Fetch Logs:**
+```bash
+curl -X GET http://localhost:3000/api/logs
+```
+
+### Postman Instructions
+
+1. Import the provided `postman-collection.json` into Postman.
+2. Update the environment or base URL if necessary (default: `http://localhost:3000`).
+3. Test individual endpoints by selecting and sending requests.
